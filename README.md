@@ -10,31 +10,29 @@ Deployment Project dilakukan pada **Streamlit** <img src="https://user-images.gi
 ## Deskripsi
 Proyek ini menganalisa dataset Bike Sharing Dataset untuk mendapatkan insight pada data tersebut kemudian membagikannya menggunakan dashboard.
 
+## Karakteristik Dataset
 
-=========================================
-## KArakteristik Dataset
-=========================================	
-    - instant: record index
-    - dteday : date
-    - season : season (1:springer, 2:summer, 3:fall, 4:winter)
-    - yr : year (0 : 2011, 1 : 2012)
-    - mnth : month ( 1 to 12)
-    - hr : hour (0 to 23)
-    - holiday : weather day is holiday or not 
-    - weekday : day of the week
-    - workingday : if day is neither weekend nor holiday is 1, otherwise is 0.
-    + weathersit : 
-        - 1: Clear / Few clouds
-        - 2: Mist / Cloudy
-        - 3: Light Snow / Rain
-        - 4: Heavy Rain / Snow
-    - temp : Normalized temperature in Celsius. The values are divided to 41 (max)
-    - atemp: Normalized feeling temperature in Celsius. The values are divided to 50 (max)
-    - hum: Normalized humidity. The values are divided to 100 (max)
-    - windspeed: Normalized wind speed. The values are divided to 67 (max)
-    - casual: count of casual users
-    - registered: count of registered users
-    - cnt: count of total rental bikes including both casual and registered
+- instant: record index
+- dteday : date
+- season : season (1:springer, 2:summer, 3:fall, 4:winter)
+- yr : year (0 : 2011, 1 : 2012)
+- mnth : month ( 1 to 12)
+- hr : hour (0 to 23)
+- holiday : weather day is holiday or not 
+- weekday : day of the week
+- workingday : if day is neither weekend nor holiday is 1, otherwise is 0.
+- weathersit :
+    - 1: Clear / Few clouds
+    - 2: Mist / Cloudy
+    - 3: Light Snow / Rain
+    - 4: Heavy Rain / Snow
+- temp : Normalized temperature in Celsius. The values are divided to 41 (max)
+- atemp: Normalized feeling temperature in Celsius. The values are divided to 50 (max)
+- hum: Normalized humidity. The values are divided to 100 (max)
+- windspeed: Normalized wind speed. The values are divided to 67 (max)
+- casual: count of casual users
+- registered: count of registered users
+- cnt: count of total rental bikes including both casual and registered
 
 ## Cara Menjalankan Proyek
 
