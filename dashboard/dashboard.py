@@ -6,15 +6,15 @@ import streamlit as st
 sns.set_style('dark')
 
 # Load data
-bike_rental_df = pd.read_csv('bike_rental.csv')
-rfm_df = pd.read_csv('rfm_analysis.csv')
+bike_rental_df = pd.read_csv('https://raw.githubusercontent.com/Dvaalmeyda/submission-proyek-analisis-data/refs/heads/main/dashboard/bike_rental.csv')
+rfm_df = pd.read_csv('https://raw.githubusercontent.com/Dvaalmeyda/submission-proyek-analisis-data/refs/heads/main/dashboard/rfm_analysis.csv')
 
 # Transform date columns
 bike_rental_df['date'] = pd.to_datetime(bike_rental_df['date'])
 
 # Sidebar
 st.sidebar.title('Bike Rental Data Analysis')
-st.sidebar.image('logo.png', width=250)
+st.sidebar.image('https://raw.githubusercontent.com/Dvaalmeyda/submission-proyek-analisis-data/0dabfd25ad65b87db43cab40f5e2e22d71494cbf/dashboard/logo.png', width=250)
 analysis_options = [
     'Total Rented Bikes by Season',
     'Total Rented Bikes by Holiday Status',
