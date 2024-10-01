@@ -56,5 +56,5 @@ cd /submission-proyek-analisis-data/dashboard
 streamlit run dashboard.py
 ```
 
-Atau dashboard bisa dilihat melalui [website berikut](https://dvaalmeyda-submission-proyek-analisis-dashboarddashboard-mzgcxk.streamlit.app/)
+Atau dashboard bisa dilihat melalui [website berikut](https://c5jviamaf7vahjcufkt3u3.streamlit.app/)
 
