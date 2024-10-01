@@ -33,18 +33,27 @@ analysis_choice = st.sidebar.selectbox('Select Analysis', analysis_options)
 if analysis_choice == 'Total Rented Bikes by Season':
     st.header('Total Rented Bikes by Season')
     season_rented_bikes = bike_rental_df.groupby('season')['total_rented'].sum().reset_index()
+    season_total_rented_sorted = season_rented_bikes.sort_values(by='total_rented', ascending=False)
     # Plot
-    fig, ax = plt.subplots(figsize=(8, 6))
-    sns.barplot(data=season_rented_bikes, x='season', y='total_rented', palette='coolwarm')
+    q1_colors = ['#1f77b4', '#d3d3d3', '#d3d3d3', '#1f77b4']
+    fig, ax = plt.subplots(figsize=(12, 6))
+    sns.barplot(data=season_rented_bikes, x='season', y='total_rented',
+                palette=q1_colors, order=season_total_rented_sorted['season'])
 
     for p in ax.patches:
-        ax.annotate(f'{int(p.get_height())}', 
-                    (p.get_x() + p.get_width() / 2., p.get_height()), 
-                    ha='center', va='bottom', fontsize=10)
-        
-    ax.set_title('Total Rented Bikes by Season')
-    ax.set_ylabel('Total Rented Bikes')
-    ax.set_xlabel('Season')
+        ax.annotate(f'{int(p.get_height()):,}', 
+                (p.get_x() + p.get_width() / 2., p.get_height()), 
+                ha='center', va='bottom', fontsize=10)
+    
+    # y-axis scale
+    max_value = season_total_rented_sorted['total_rented'].max()
+    plt.ylim(0, max_value * 1.1)  # max limit 110%
+    plt.yticks([i for i in range(0, int(max_value) + 1, 200000)])  # scale 200,000
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: format(int(x), ',')))
+
+    ax.set_title('Total Rented Bikes by Season', fontsize=16)
+    ax.set_ylabel('Total Rented Bikes', fontsize=12)
+    ax.set_xlabel('Season', fontsize=12)
     st.pyplot(fig)
 
 # Total Rented Bikes by Holiday Status
@@ -52,17 +61,25 @@ if analysis_choice == 'Total Rented Bikes by Holiday Status':
     st.header('Total Rented Bikes by Holiday Status')
     holiday_rented_bikes = bike_rental_df.groupby('is_holiday')['total_rented'].sum().reset_index()
     # Plot
-    fig, ax = plt.subplots(figsize=(8, 6))
-    sns.barplot(data=holiday_rented_bikes, x='is_holiday', y='total_rented', palette='coolwarm')
+    colors = ['#921a40', '#d9abab']
+    fig, ax = plt.subplots(figsize=(12, 6))
+    sns.barplot(data=holiday_rented_bikes, x='is_holiday', y='total_rented', 
+                palette=colors, order=[0, 1])
 
     for p in ax.patches:
-        ax.annotate(f'{int(p.get_height())}', 
-                    (p.get_x() + p.get_width() / 2., p.get_height()), 
-                    ha='center', va='bottom', fontsize=10)
+        ax.annotate(f'{int(p.get_height()):,}', 
+                (p.get_x() + p.get_width() / 2., p.get_height()), 
+                ha='center', va='bottom', fontsize=10)
 
-    ax.set_title('Total Rented Bikes by Holiday Status')
-    ax.set_ylabel('Total Rented Bikes')
-    ax.set_xlabel('Holiday Status')
+    # y-axis scale
+    max_value1 = holiday_rented_bikes['total_rented'].max()
+    plt.ylim(0, max_value1 * 1.2)  # max limit 110%
+    plt.yticks([i for i in range(0, int(max_value1) + 1, 500000)])  # scale 500,000
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: format(int(x), ',')))
+
+    ax.set_title('Total Rented Bikes by Holiday Status', fontsize=16)
+    ax.set_ylabel('Total Rented Bikes', fontsize=12)
+    ax.set_xlabel('Holiday Status', fontsize=12)
     ax.set_xticklabels(['No', 'Yes'])
     st.pyplot(fig)
 
@@ -70,18 +87,27 @@ if analysis_choice == 'Total Rented Bikes by Holiday Status':
 if analysis_choice == 'Total Rented Bikes by Weather Situation':
     st.header('Total Rented Bikes by Weather Situation')
     weather_rented_bikes = bike_rental_df.groupby('weather_situation')['total_rented'].sum().reset_index()
+    weather_total_rented = weather_rented_bikes.sort_values(by='total_rented', ascending=False)
     # Plot
-    fig, ax = plt.subplots(figsize=(8, 6))
-    sns.barplot(data=weather_rented_bikes, x='weather_situation', y='total_rented', palette='coolwarm')
+    colors = ['#91d7ff', '#c6eeff', '#e4e4e4', '#f3f3f3']
+    fig, ax = plt.subplots(figsize=(12, 6))
+    sns.barplot(data=weather_rented_bikes, x='weather_situation', y='total_rented',
+                palette=colors, order=weather_total_rented['weather_situation'])
     
     for p in ax.patches:
-        ax.annotate(f'{int(p.get_height())}', 
-                    (p.get_x() + p.get_width() / 2., p.get_height()), 
-                    ha='center', va='bottom', fontsize=10)
+        ax.annotate(f'{int(p.get_height()):,}', 
+                (p.get_x() + p.get_width() / 2., p.get_height()), 
+                ha='center', va='bottom', fontsize=10)
     
-    ax.set_title('Total Rented Bikes by Weather Situation')
-    ax.set_ylabel('Total Rented Bikes')
-    ax.set_xlabel('Weather Situation')
+    # y-axis scale
+    max_value2 = weather_total_rented['total_rented'].max()
+    plt.ylim(0, max_value2 * 1.1)  # max limit 110%
+    plt.yticks([i for i in range(0, int(max_value2) + 1, 250000)])  # scale 250,000
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: format(int(x), ',')))
+    
+    ax.set_title('Total Rented Bikes by Weather Situation', fontsize=16)
+    ax.set_ylabel('Total Rented Bikes', fontsize=12)
+    ax.set_xlabel('Weather Situation', fontsize=12)
     st.pyplot(fig)
 
 # Total Customer (Casual and Registered)
@@ -93,16 +119,23 @@ if analysis_choice == 'Total Customer (Casual and Registered)':
     st.header('Total Customer (Casual and Registered)')
     # Plot
     fig, ax = plt.subplots(figsize=(12, 6))
-    sns.barplot(data=casual_registered_total, x='customer', y='total_rented', palette='Set1')
+    sns.barplot(data=casual_registered_total, x='customer', y='total_rented',
+                palette='Set1')
 
     for p in ax.patches:
-        ax.annotate(f'{int(p.get_height())}', 
-                    (p.get_x() + p.get_width() / 2., p.get_height()), 
-                    ha='center', va='bottom', fontsize=10)
+        ax.annotate(f'{int(p.get_height()):,}', 
+                (p.get_x() + p.get_width() / 2., p.get_height()), 
+                ha='center', va='bottom', fontsize=10)
 
-    ax.set_title('Total Customer (Casual and Registered)')
-    ax.set_ylabel('Total Rented Bikes')
-    ax.set_xlabel('Customer Type')
+    # y-axis scale
+    max_value3 = casual_registered_total['total_rented'].max()
+    plt.ylim(0, max_value3 * 1.1)  # max limit 110%
+    plt.yticks([i for i in range(0, int(max_value3) + 1, 250000)])  # scale 250,000
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, p: format(int(x), ',')))
+
+    ax.set_title('Total Customer (Casual and Registered)', fontsize=16)
+    ax.set_ylabel('Total Rented Bikes', fontsize=12)
+    ax.set_xlabel('Customer Type', fontsize=12)
     st.pyplot(fig)
 
 # Monthly Total Rented Bikes Trend (2011-2012)
@@ -115,10 +148,11 @@ if analysis_choice == 'Monthly Total Rented Bikes Trend (2011-2012)':
     st.header('Monthly Total Rented Bikes Trend (2011-2012)')
     # Plot
     fig, ax = plt.subplots(figsize=(12, 6))
-    sns.lineplot(data=year_month_total_rented, x='month', y='total_rented', hue='year', palette='muted', marker='o')
-    ax.set_title('Monthly Total Rented Bikes Trend (2011-2012)')
-    ax.set_ylabel('Total Rented Bikes')
-    ax.set_xlabel('Month')
+    sns.lineplot(data=year_month_total_rented, x='month', y='total_rented', hue='year',
+                 palette='muted', marker='o')
+    ax.set_title('Monthly Total Rented Bikes Trend (2011-2012)', fontsize=16)
+    ax.set_ylabel('Total Rented Bikes', fontsize=12)
+    ax.set_xlabel('Month', fontsize=12)
     st.pyplot(fig)
 
 # RFM Analysis
